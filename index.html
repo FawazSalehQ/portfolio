@@ -192,6 +192,10 @@
     nav.top.scrolled { padding: 10px 22px; }
     .nav-links a:not(.cta) { display: none; }
   }
+  @media (max-width: 520px) {
+    .nav-links a.cta { display: none; }
+    .theme-toggle, .lang-toggle { margin-left: 4px; }
+  }
 
   /* ─────────── LAYOUT ─────────── */
   .wrap { max-width: 1320px; margin: 0 auto; padding: 0 48px; }
@@ -451,9 +455,10 @@
   .marquee-track {
     display: inline-flex;
     gap: 56px;
-    animation: scroll 40s linear infinite;
+    animation: scroll 34.8s linear infinite;
     align-items: center;
   }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
   .marquee span {
     font-family: var(--serif);
     font-weight: 400;
