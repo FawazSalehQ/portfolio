@@ -2248,13 +2248,20 @@
   }/*EDITMODE-END*/;
 
   function TweaksApp() {
-    const [tweaks, setTweak] = window.useTweaks(TWEAK_DEFAULTS);
+    const initialDefaults = React.useMemo(() => ({
+      ...TWEAK_DEFAULTS,
+      dark: document.documentElement.getAttribute('data-theme') === 'dark',
+    }), []);
+    const [tweaks, setTweak] = window.useTweaks(initialDefaults);
     React.useEffect(() => {
       const root = document.documentElement;
       root.style.setProperty('--mint', tweaks.accent);
       root.style.setProperty('--mint-deep', tweaks.accent);
-      // Only override --ink in light mode; dark mode owns its own ink token
-      if (root.getAttribute('data-theme') !== 'dark') {
+      // Inline --ink only in light mode; remove it in dark so the dark-theme
+      // CSS rule's --ink value wins (inline beats CSS variable definitions).
+      if (tweaks.dark) {
+        root.style.removeProperty('--ink');
+      } else {
         root.style.setProperty('--ink', tweaks.ink);
       }
       document.body.style.fontSize = (16 * tweaks.fontScale) + 'px';
