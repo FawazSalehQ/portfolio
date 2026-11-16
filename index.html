@@ -242,7 +242,7 @@
   }
   .nav-links a.cta:hover { background: var(--mint-deep); color: var(--on-accent); }
 
-  @media (max-width: 960px) {
+  @media (max-width: 1000px) {
     nav.top { padding: 16px 22px; }
     nav.top.scrolled { padding: 10px 22px; }
     .nav-links a:not(.cta) { display: none; }
@@ -888,6 +888,147 @@
     .case.wide, .case.med, .case.tall, .case.std { grid-column: span 1; }
   }
 
+  /* ─────────── PROJECTS ─────────── */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .proj {
+    background: var(--paper-2);
+    border: 1px solid var(--rule-soft);
+    border-radius: 20px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.45s var(--ease), box-shadow 0.45s, background 0.45s;
+  }
+  .proj:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -20px rgba(23, 51, 40, 0.25);
+    background: var(--paper);
+  }
+  .proj-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent-text);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .proj-num .live-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--mint-deep);
+    animation: pulse 2.6s var(--ease) infinite;
+  }
+  .proj h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(24px, 2.3vw, 32px);
+    line-height: 1.15;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    margin-bottom: 14px;
+    text-wrap: balance;
+  }
+  .proj h3 .em { color: var(--accent-text); font-weight: 600; }
+  .proj-desc {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    max-width: 60ch;
+  }
+  .proj-flow {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-mute);
+  }
+  .proj-flow i { font-style: normal; color: var(--accent-text); }
+  /* Sample questions, set like the two sides of a bilingual chat */
+  .proj-ask {
+    margin-top: 22px;
+    padding: 18px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .proj-ask .lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-mute);
+    margin-bottom: 4px;
+  }
+  .proj-ask .q {
+    max-width: 88%;
+    padding: 10px 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--mint-tint);
+    border-radius: 14px 14px 14px 4px;
+    margin-right: auto;            /* English sits on the left… */
+  }
+  .proj-ask .q[lang="ar"] {
+    border-radius: 14px 14px 4px 14px;
+    margin-right: 0;
+    margin-left: auto;             /* …Arabic on the right, in either page direction */
+  }
+  /* The Arabic face is only requested once a project card has scrolled into
+     view ('seen' is added by the reveal script), so English visitors who never
+     reach this section do not download it. */
+  .proj.seen .proj-ask .q[lang="ar"] { font-family: 'Noto Sans Arabic', var(--sans); }
+  .proj-tags {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .proj-tags span {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+  .proj-foot {
+    margin-top: auto;
+    padding-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 18px;
+  }
+  .proj-foot .btn { padding: 12px 20px; }
+  .proj-note { font-size: 12px; color: var(--ink-mute); }
+  @media (max-width: 900px) {
+    .proj-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .proj { padding: 24px; }
+    .proj-ask { padding: 14px; }
+    .proj-ask .q { max-width: 100%; }
+  }
+
   /* ─────────── CAPABILITIES ─────────── */
   .cap-grid {
     display: grid;
@@ -1355,11 +1496,15 @@
   html[data-theme="dark"] .cred { border-color: var(--rule); }
   html[data-theme="dark"] .cred:hover { background: #15291f; }
   html[data-theme="dark"] .scroll-progress { mix-blend-mode: screen; }
-  html[data-theme="dark"] .trait, html[data-theme="dark"] .exp-tags span {
+  html[data-theme="dark"] .trait, html[data-theme="dark"] .exp-tags span, html[data-theme="dark"] .proj-tags span {
     background: #1c3527; border-color: #244033; color: var(--ink-soft);
   }
   html[data-theme="dark"] .case { border-color: var(--rule); }
   html[data-theme="dark"] .case:hover { background: #15291f; }
+  html[data-theme="dark"] .proj { border-color: var(--rule); }
+  html[data-theme="dark"] .proj:hover { background: #15291f; }
+  html[data-theme="dark"] .proj-ask { background: #0e2018; border-color: #244033; }
+  html[data-theme="dark"] .proj-ask .q { background: #1c3527; }
   html[data-theme="dark"] img { filter: brightness(0.92) contrast(1.05); }
 
   /* RTL — Arabic */
@@ -1372,6 +1517,7 @@
   html[lang="ar"] .about-card .quote,
   html[lang="ar"] .philosophy blockquote,
   html[lang="ar"] .case h4,
+  html[lang="ar"] .proj h3,
   html[lang="ar"] .exp-main h3,
   html[lang="ar"] .cred h6,
   html[lang="ar"] .cap .cap-head h5,
@@ -1399,6 +1545,10 @@
   html[lang="ar"] .hero-title .underline::after { right: 0; transform-origin: right center; }
   html[lang="ar"] .pill { font-family: 'Noto Sans Arabic', var(--mono); }
   html[lang="ar"] .exp-tags span,
+  html[lang="ar"] .proj-tags span,
+  html[lang="ar"] .proj-num,
+  html[lang="ar"] .proj-flow,
+  html[lang="ar"] .proj-ask .lbl,
   html[lang="ar"] .trait,
   html[lang="ar"] .eyebrow,
   html[lang="ar"] .case .case-num,
@@ -1431,6 +1581,7 @@
   html[lang="ar"] .philosophy .pre { font-family: 'Noto Sans Arabic', var(--mono); text-transform: none; letter-spacing: 0.02em; }
   /* Arrows and stars stay out of the Arabic faces, so no symbol fonts are fetched for them */
   html[lang="ar"] .btn .arrow,
+  html[lang="ar"] .proj-flow i,
   html[lang="ar"] .marquee .sep { font-family: var(--sans); }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1529,6 +1680,7 @@
     <a href="#about" data-k="nav.about">About</a>
     <a href="#experience" data-k="nav.exp">Experience</a>
     <a href="#work" data-k="nav.work">Work</a>
+    <a href="#projects" data-k="nav.proj">Projects</a>
     <a href="#capabilities" data-k="nav.cap">Capabilities</a>
     <a href="#contact" class="cta" data-k="nav.cta">Get in touch</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Dark theme" aria-pressed="false" type="button">
@@ -1759,11 +1911,56 @@
   </div>
 </section>
 
+<!-- ─────────── PROJECTS ─────────── -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num" data-k="sec.proj.num">§ 04 / Projects</div>
+      <h2 class="sec-title" data-k="sec.proj.title">Tools I've <span class="em">built.</span></h2>
+    </div>
+
+    <div class="proj-grid">
+      <article class="proj reveal" id="proj1">
+        <div class="proj-num"><span class="live-dot"></span> Project 01 — Live</div>
+        <h3>Saudi Labor Law <span class="em">Assistant</span></h3>
+        <p class="proj-desc">Answers questions about the Saudi Labor Law in Arabic or English. It retrieves the relevant passages from the official Arabic and English texts, answers only from them, and names the article it relied on. When the law doesn't cover a question, it says so.</p>
+        <div class="proj-flow"><span>Official text</span><i>→</i><span>Retrieval</span><i>→</i><span>Grounded answer</span></div>
+        <div class="proj-ask">
+          <div class="lbl">Try asking</div>
+          <p class="q" dir="ltr" lang="en">How is the end-of-service benefit calculated?</p>
+          <p class="q" dir="rtl" lang="ar">ما هي مدة الإجازة السنوية التي يستحقها العامل؟</p>
+        </div>
+        <div class="proj-tags"><span>Python</span><span>Flask</span><span>TF-IDF retrieval</span><span>OpenAI API</span><span>Arabic + English</span></div>
+        <div class="proj-foot">
+          <a class="btn primary" href="https://saudi-labor-law.vercel.app/" target="_blank" rel="noopener">Open the live app <span class="arrow">→</span></a>
+          <span class="proj-note">General guidance, not legal advice.</span>
+        </div>
+      </article>
+
+      <article class="proj reveal d1" id="proj2">
+        <div class="proj-num"><span class="live-dot"></span> Project 02 — Live</div>
+        <h3>ISO 9001:2015 <span class="em">Assistant</span></h3>
+        <p class="proj-desc">A quality-management assistant for ISO 9001:2015. Ask in English and it answers from the text of the standard, pointing to the relevant clause. It also replies in Arabic, but it searches the English text only, so its Arabic answers are its own interpretation, and it says so.</p>
+        <div class="proj-flow"><span>The standard</span><i>→</i><span>Retrieval</span><i>→</i><span>Clause-cited answer</span></div>
+        <div class="proj-ask">
+          <div class="lbl">Try asking</div>
+          <p class="q" dir="ltr" lang="en">What does the standard require for internal audits?</p>
+          <p class="q" dir="ltr" lang="en">What are the requirements for control of documented information?</p>
+        </div>
+        <div class="proj-tags"><span>Python</span><span>Flask</span><span>TF-IDF retrieval</span><span>OpenAI API</span><span>Arabic + English</span></div>
+        <div class="proj-foot">
+          <a class="btn primary" href="https://iso-9001-bot.vercel.app/" target="_blank" rel="noopener">Open the live app <span class="arrow">→</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ─────────── CAPABILITIES ─────────── -->
 <section id="capabilities">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-num" data-k="sec4.num">§ 04 / Capabilities</div>
+      <div class="sec-num" data-k="sec4.num">§ 05 / Capabilities</div>
       <h2 class="sec-title" data-k="sec4.title">My <span class="terra">greatest</span> skills.</h2>
     </div>
 
@@ -1826,7 +2023,7 @@
 <section id="credentials">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-num" data-k="sec5.num">§ 05 / Credentials &amp; Background</div>
+      <div class="sec-num" data-k="sec5.num">§ 06 / Credentials &amp; Background</div>
       <h2 class="sec-title" data-k="sec5.title">On the <span class="em">record.</span></h2>
     </div>
 
@@ -2009,7 +2206,7 @@
   const I18N = {
     en: {
       'mark': 'Fawaz Aljathnan',
-      'nav.about': 'About', 'nav.exp': 'Experience', 'nav.work': 'Work',
+      'nav.about': 'About', 'nav.exp': 'Experience', 'nav.work': 'Work', 'nav.proj': 'Projects',
       'nav.cap': 'Capabilities', 'nav.cta': 'Get in touch',
       'hero.eyebrow': '<span class="live-dot"></span> Open to senior people-practice & AI roles',
       'hero.title': 'Building <span class="it">human</span><br />systems &amp; deploying<br /><span class="underline"><span class="terra">intelligent</span></span> ones.',
@@ -2027,8 +2224,9 @@
       'sec1.num': '§ 01 / Profile', 'sec1.title': 'Two disciplines under <span class="em">one umbrella.</span>',
       'sec2.num': '§ 02 / Trajectory', 'sec2.title': 'A working <span class="terra">history.</span>',
       'sec3.num': '§ 03 / Selected Engagements', 'sec3.title': 'My <span class="em">achievements.</span>',
-      'sec4.num': '§ 04 / Capabilities', 'sec4.title': 'My <span class="terra">greatest</span> skills.',
-      'sec5.num': '§ 05 / Credentials &amp; Background', 'sec5.title': 'On the <span class="em">record.</span>',
+      'sec.proj.num': '§ 04 / Projects', 'sec.proj.title': 'Tools I\'ve <span class="em">built.</span>',
+      'sec4.num': '§ 05 / Capabilities', 'sec4.title': 'My <span class="terra">greatest</span> skills.',
+      'sec5.num': '§ 06 / Credentials &amp; Background', 'sec5.title': 'On the <span class="em">record.</span>',
       'about.label': 'Currently focused on',
       'about.quote': 'Local LLM deployment in a regulated industrial environment — and the procedural frameworks that let it ship.',
       'about.attr': '<strong>Fawaz Aljathnan</strong> · BAE Systems Arabian Industries',
@@ -2045,7 +2243,7 @@
     },
     ar: {
       'mark': 'فواز الجذنان',
-      'nav.about': 'نبذة', 'nav.exp': 'المسيرة', 'nav.work': 'الأعمال',
+      'nav.about': 'نبذة', 'nav.exp': 'المسيرة', 'nav.work': 'الأعمال', 'nav.proj': 'المشاريع',
       'nav.cap': 'الكفاءات', 'nav.cta': 'تواصل معي',
       'hero.eyebrow': '<span class="live-dot"></span> مفتوح لأدوار قيادية في تطوير الأفراد وتبني الذكاء الاصطناعي',
       'hero.title': 'بناء أنظمة <span class="it">بشرية</span><br />ونشر أنظمة <span class="nw"><span class="underline"><span class="terra">ذكية</span></span>.</span>',
@@ -2062,9 +2260,10 @@
       'motion.pause': 'إيقاف الحركة',
       'sec1.num': '§ ٠١ / الملف الشخصي', 'sec1.title': 'ممارستان تحت <span class="em">مظلة واحدة.</span>',
       'sec2.num': '§ ٠٢ / المسيرة المهنية', 'sec2.title': 'سجلّ <span class="terra">العمل.</span>',
-      'sec3.num': '§ ٠٣ / مشاريع مختارة', 'sec3.title': '<span class="em">إنجازاتي.</span>',
-      'sec4.num': '§ ٠٤ / الكفاءات', 'sec4.title': '<span class="terra">أعظم</span> مهاراتي.',
-      'sec5.num': '§ ٠٥ / المؤهلات والخلفية', 'sec5.title': 'في <span class="em">السجل.</span>',
+      'sec3.num': '§ ٠٣ / أعمال مختارة', 'sec3.title': '<span class="em">إنجازاتي.</span>',
+      'sec.proj.num': '§ ٠٤ / المشاريع', 'sec.proj.title': 'أدوات <span class="em">بنيتُها.</span>',
+      'sec4.num': '§ ٠٥ / الكفاءات', 'sec4.title': '<span class="terra">أعظم</span> مهاراتي.',
+      'sec5.num': '§ ٠٦ / المؤهلات والخلفية', 'sec5.title': 'في <span class="em">السجل.</span>',
       'about.label': 'التركيز الحالي',
       'about.quote': 'نشر النماذج اللغوية محلياً داخل بيئة صناعية منظَّمة — والأطر الإجرائية التي تتيح لها أن تُطبَّق.',
       'about.attr': '<strong>فواز الجذنان</strong> · BAE Systems الصناعات العربية',
@@ -2161,6 +2360,35 @@
         <h4 aria-level="3">Stepped into <span class="em">Acting Training Lead</span> and Acting IQA Specialist during transition.</h4>
         <p class="case-desc">Led an 11–15 person cross-functional team. Strengthened collaboration; sustained delivery through the change.</p>
         <div class="case-metric"><span class="v">11–15</span><span class="l">Team led</span></div>`,
+      proj1: `
+        <div class="proj-num"><span class="live-dot"></span> Project 01 — Live</div>
+        <h3>Saudi Labor Law <span class="em">Assistant</span></h3>
+        <p class="proj-desc">Answers questions about the Saudi Labor Law in Arabic or English. It retrieves the relevant passages from the official Arabic and English texts, answers only from them, and names the article it relied on. When the law doesn't cover a question, it says so.</p>
+        <div class="proj-flow"><span>Official text</span><i>→</i><span>Retrieval</span><i>→</i><span>Grounded answer</span></div>
+        <div class="proj-ask">
+          <div class="lbl">Try asking</div>
+          <p class="q" dir="ltr" lang="en">How is the end-of-service benefit calculated?</p>
+          <p class="q" dir="rtl" lang="ar">ما هي مدة الإجازة السنوية التي يستحقها العامل؟</p>
+        </div>
+        <div class="proj-tags"><span>Python</span><span>Flask</span><span>TF-IDF retrieval</span><span>OpenAI API</span><span>Arabic + English</span></div>
+        <div class="proj-foot">
+          <a class="btn primary" href="https://saudi-labor-law.vercel.app/" target="_blank" rel="noopener">Open the live app <span class="arrow">→</span></a>
+          <span class="proj-note">General guidance, not legal advice.</span>
+        </div>`,
+      proj2: `
+        <div class="proj-num"><span class="live-dot"></span> Project 02 — Live</div>
+        <h3>ISO 9001:2015 <span class="em">Assistant</span></h3>
+        <p class="proj-desc">A quality-management assistant for ISO 9001:2015. Ask in English and it answers from the text of the standard, pointing to the relevant clause. It also replies in Arabic, but it searches the English text only, so its Arabic answers are its own interpretation, and it says so.</p>
+        <div class="proj-flow"><span>The standard</span><i>→</i><span>Retrieval</span><i>→</i><span>Clause-cited answer</span></div>
+        <div class="proj-ask">
+          <div class="lbl">Try asking</div>
+          <p class="q" dir="ltr" lang="en">What does the standard require for internal audits?</p>
+          <p class="q" dir="ltr" lang="en">What are the requirements for control of documented information?</p>
+        </div>
+        <div class="proj-tags"><span>Python</span><span>Flask</span><span>TF-IDF retrieval</span><span>OpenAI API</span><span>Arabic + English</span></div>
+        <div class="proj-foot">
+          <a class="btn primary" href="https://iso-9001-bot.vercel.app/" target="_blank" rel="noopener">Open the live app <span class="arrow">→</span></a>
+        </div>`,
       cap1: `
         <div class="cap-head"><h5 aria-level="3">Organizational Development</h5><span class="ix">i.</span></div>
         <ul>
@@ -2276,6 +2504,35 @@
         <h4 aria-level="3">تولّي دور <span class="em">قائد تدريب بالنيابة</span> وأخصائي ضمان جودة بالنيابة خلال مرحلة التحوّل.</h4>
         <p class="case-desc">قيادة فريق متعدد الوظائف من ١١–١٥ فرداً. تعزيز التعاون والحفاظ على وتيرة التسليم خلال التغيير.</p>
         <div class="case-metric"><span class="v">١١–١٥</span><span class="l">حجم الفريق</span></div>`,
+      proj1: `
+        <div class="proj-num"><span class="live-dot"></span> مشروع ٠١ — يعمل الآن</div>
+        <h3>مساعد <span class="em">نظام العمل السعودي</span></h3>
+        <p class="proj-desc">يجيب عن الأسئلة المتعلقة بنظام العمل السعودي بالعربية أو الإنجليزية. يسترجع المقاطع ذات الصلة من النصّين الرسميين العربي والإنجليزي، ويجيب استناداً إليهما فقط، مع ذكر المادة التي اعتمد عليها. وإن لم يتناول النظام السؤال صرّح بذلك.</p>
+        <div class="proj-flow"><span>النص الرسمي</span><i>←</i><span>الاسترجاع</span><i>←</i><span>إجابة مستندة إلى النص</span></div>
+        <div class="proj-ask">
+          <div class="lbl">جرّب أن تسأل</div>
+          <p class="q" dir="ltr" lang="en">How is the end-of-service benefit calculated?</p>
+          <p class="q" dir="rtl" lang="ar">ما هي مدة الإجازة السنوية التي يستحقها العامل؟</p>
+        </div>
+        <div class="proj-tags"><span>Python</span><span>Flask</span><span>استرجاع TF-IDF</span><span>OpenAI API</span><span>العربية + الإنجليزية</span></div>
+        <div class="proj-foot">
+          <a class="btn primary" href="https://saudi-labor-law.vercel.app/" target="_blank" rel="noopener">افتح التطبيق <span class="arrow">→</span></a>
+          <span class="proj-note">للإرشاد العام فقط وليس استشارة قانونية.</span>
+        </div>`,
+      proj2: `
+        <div class="proj-num"><span class="live-dot"></span> مشروع ٠٢ — يعمل الآن</div>
+        <h3>مساعد <span class="em">ISO 9001:2015</span></h3>
+        <p class="proj-desc">مساعد لإدارة الجودة وفق المواصفة ISO 9001:2015. اسأله بالإنجليزية فيجيب من نص المواصفة مع الإشارة إلى البند ذي الصلة. ويجيب بالعربية أيضاً، لكنه يبحث في النص الإنجليزي فقط، فتكون إجاباته بالعربية تفسيراً منه، ويوضّح ذلك.</p>
+        <div class="proj-flow"><span>نص المواصفة</span><i>←</i><span>الاسترجاع</span><i>←</i><span>إجابة موثّقة بالبند</span></div>
+        <div class="proj-ask">
+          <div class="lbl">جرّب أن تسأل</div>
+          <p class="q" dir="ltr" lang="en">What does the standard require for internal audits?</p>
+          <p class="q" dir="ltr" lang="en">What are the requirements for control of documented information?</p>
+        </div>
+        <div class="proj-tags"><span>Python</span><span>Flask</span><span>استرجاع TF-IDF</span><span>OpenAI API</span><span>العربية + الإنجليزية</span></div>
+        <div class="proj-foot">
+          <a class="btn primary" href="https://iso-9001-bot.vercel.app/" target="_blank" rel="noopener">افتح التطبيق <span class="arrow">→</span></a>
+        </div>`,
       cap1: `
         <div class="cap-head"><h5 aria-level="3">التطوير التنظيمي</h5><span class="ix">i.</span></div>
         <ul>
